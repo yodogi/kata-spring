@@ -1,6 +1,7 @@
 package org.yodogi.learn.kata.spring.web;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,8 +21,9 @@ public class HelloController {
 	@RequestMapping(value = "/hello.htm")
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		logger.info("Returning hello view");
+		String now = new Date().toString();
+		logger.info("Returning hello view with " + now);
 
-		return new ModelAndView("hello.jsp");
+		return new ModelAndView("hello", "now", now);
 	}
 }
