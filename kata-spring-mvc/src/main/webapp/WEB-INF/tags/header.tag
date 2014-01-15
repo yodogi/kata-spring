@@ -1,5 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ attribute name="title_page" required="true" %>
+<%@ attribute name="body_completation" required="false" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
@@ -13,11 +14,10 @@
 		<title>${title_page} :: Spring Application</title>
 		
 		<script src="<c:url value='/resources/js/jquery.min.js' />"></script>
-		<script src="<c:url value='/resources/js/kendo.all.min.js' />"></script>
-		<script src="<c:url value='resources/js/kendo.web.min.js' />"></script>
+		<script src="<c:url value='/resources/js/kendo.web.min.js' />"></script>
 
     </head>
-    <body>
+    <body ${body_completation}>
     	<div class="page">
     		<div id="example" class="k-content">
     		
