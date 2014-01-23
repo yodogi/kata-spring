@@ -1,0 +1,43 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:security="http://www.springframework.org/schema/security"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:mvc="http://www.springframework.org/schema/mvc"
+  xmlns:p="http://www.springframework.org/schema/p"
+  xmlns:util="http://www.springframework.org/schema/util"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	       http://www.springframework.org/schema/context
+    	   http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security-3.2.xsd
+           http://www.springframework.org/schema/mvc
+           http://www.springframework.org/schema/mvc/spring-mvc.xsd
+           http://www.springframework.org/schema/util 
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+ 	<!-- Scans the classpath of this application for @Components to deploy as beans -->
+	<context:component-scan base-package="org.yodogi.learn.kata.spring" />
+
+ 	<!-- Configure Spring Security : BEGIN -->
+	
+	<security:global-method-security secured-annotations="enabled" />
+ 	
+	<security:http pattern="/css/**" security="none"/>
+	<security:http pattern="/login.htm*" security="none"/>
+	
+ 	<security:http auto-config='true'>
+    	<security:intercept-url pattern="/welcome*" access="ROLE_USER" />
+		<security:form-login login-page="/login.htm" default-target-url="/welcome.htm" authentication-failure-url="/loginfailed.htm" />
+		<security:logout logout-success-url="/logout.htm" />
+  	</security:http>
+ 	
+ 	<bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/>
+ 	
+	<security:authentication-manager>
+	  <security:authentication-provider ref="restAuthenticationProvider" />
+	</security:authentication-manager>
+
+ 	<!-- Configure Spring Security : END -->
+
+</beans>

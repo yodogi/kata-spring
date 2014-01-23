@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller("datepicker-controller")
+@Controller("kendo-controller")
 @RequestMapping(value = "/kendo/")
 public class KendoController {
 
@@ -27,11 +27,43 @@ public class KendoController {
 
 		Date now = new Date();
 
-		ModelAndView model = new ModelAndView("datepicker", "now", now);
+		ModelAndView model = new ModelAndView("kendo/datepicker", "now", now);
 
 		model.addObject("dates", getDates());
 
 		logger.info("Returning kendo view with " + now + " for dates: " + getDates().toString());
+
+		return model;
+	}
+
+	@RequestMapping(value = { "/panelbar.htm" }, method = RequestMethod.GET)
+	public ModelAndView panelbar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		ModelAndView model = new ModelAndView("kendo/panelbar");
+
+		logger.info("Returning panelbar kendo view.");
+
+		return model;
+	}
+
+	@RequestMapping(value = { "/datasource.htm" }, method = RequestMethod.GET)
+	public ModelAndView datasource(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		ModelAndView model = new ModelAndView("kendo/datasource");
+
+		logger.info("Returning datasource kendo view.");
+
+		return model;
+	}
+
+	@RequestMapping(value = { "/dashboard.htm" }, method = RequestMethod.GET)
+	public ModelAndView dashboard(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		Date now = new Date();
+
+		ModelAndView model = new ModelAndView("kendo/dashboard", "now", now);
+
+		logger.info("Returning kendo view with " + now);
 
 		return model;
 	}

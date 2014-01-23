@@ -2,52 +2,99 @@
 
 <%@taglib prefix="templ" tagdir="/WEB-INF/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-<templ:header title_page="Spring Security - LOGIN" body_completation="onload='document.f.j_username.focus();'" />
+<templ:header title_page="Spring Security - LOGIN" body_completation="onload='document.login_form.j_username.focus();'" />
 
 <style>
-.errorblock {
-	color: #ff0000;
-	background-color: #ffEEEE;
-	border: 3px solid #ff0000;
-	padding: 8px;
-	margin: 16px;
-}
 </style>
 
-	<h3>Login with Username and Password (Custom Page)</h3>
- 	
-	<c:if test="${not empty error}">
-		<div class="errorblock">
-			Your login attempt was not successful, try again.<br /> Caused :
-			${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
-		</div>
-	</c:if>
- 	
-	<form name='f' action="<c:url value='j_spring_security_check' />" method='POST'>
- 
-		<table>
-			<tr>
-				<td>User:</td>
-				<td><input type='text' name='j_username' value=''>
-				</td>
-			</tr>
-			<tr>
-				<td>Password:</td>
-				<td><input type='password' name='j_password' />
-				</td>
-			</tr>
-			<tr>
-				<td colspan='2'><input name="submit" type="submit"
-					value="submit" />
-				</td>
-			</tr>
-			<tr>
-				<td colspan='2'><input name="reset" type="reset" />
-				</td>
-			</tr>
-		</table>
- 
-	</form>
+	<div id="login_dialog" class="login_style">
+	<sec:authorize access="isAuthenticated()">
+		<h3>Username : ${username}</h3>
+	</sec:authorize>
+	
+		<c:if test="${not empty error}">
+			<div class="errorblock">
+				Your login attempt was not successful, try again.<br /> Caused :
+				${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
+			</div>
+		</c:if>
+	 	
+		<form name='login_form' action="<c:url value='j_spring_security_check' />" method='POST'>
+            <ul>
+                <li>
+                	<label for="j_username"><spring:message code="label.login.username" text="Usuario" />:</label>
+                	<input type="text" name="j_username" size="10" value="" />
+                </li>
+                <li>
+                	<label for="j_password"><spring:message code="label.login.password" text="Contraseña" />:</label>
+                	<input type="password" name="j_password" size="10" value="" />
+                </li>
+                <li>
+                	<br/>
+	    	        <button name="submit" type="submit" style="display: block">
+	    	        	<spring:message code="label.login.button" text="Entrar" />
+	    	        </button>
+                </li>
+            </ul>
+		</form>
+	</div>
 
+<script>
+$("#login_dialog").kendoWindow({
+	modal: true,
+	draggable: false,
+	resizable: false,
+	title: false,
+  	actions: []
+});
+var dialog = $("#login_dialog").data("kendoWindow");
+dialog.center();
+
+</script>
+
+    <style scoped>
+		.errorblock {
+			color: #ff0000;
+			background-color: #ffEEEE;
+			border: 3px solid #ff0000;
+			padding: 8px;
+			margin: 16px;
+		}
+
+        .login_style ul {
+        	list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .login_style li {
+        	height: 28px;
+        	vertical-align: middle;
+        	color: #000;
+        }
+
+        .login_style ul label {
+        	display: inline-block;
+        	width: 100px;
+        	text-align: right;
+        	padding-right: 5px;
+        	color: #000;
+        }
+
+        .login_style label {
+        	color: #000;
+        }
+
+        .login_style ul input {
+        	border: 1px solid #ddd;
+        }
+
+        .login_style button {
+        	float: right;
+        	margin-right: 85px;
+        }
+    </style>
 <templ:footer />
