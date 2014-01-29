@@ -33,9 +33,13 @@
   	</security:http>
  	
  	<bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/>
- 	
+
 	<security:authentication-manager>
-	  <security:authentication-provider ref="restAuthenticationProvider" />
+		<security:authentication-provider>
+			<security:user-service>
+				<security:user name="admin" password="admin" authorities="ROLE_USER" />
+			</security:user-service>
+		</security:authentication-provider>
 	</security:authentication-manager>
 
  	<!-- Configure Spring Security : END -->

@@ -58,8 +58,4 @@ public class SpringSecurityController {
 
 	}
 
-	private class Ticket {
-		String ticket;
-	}
-
 }
