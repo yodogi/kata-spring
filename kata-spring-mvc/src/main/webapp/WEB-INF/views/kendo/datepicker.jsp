@@ -3,8 +3,13 @@
 
 <%@taglib prefix="templ" tagdir="/WEB-INF/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<templ:header title_page="DatePicker" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+		<templ:top_head title_page="DatePicker" />
+    </head>
+    <body>
+    	<templ:top_body />
 
 <!-- http://docs.kendoui.com/api/web/datepicker -->
 <%
@@ -72,6 +77,7 @@ String template = "# if (isInArray(+data.date, data.dates)) { #" +
 </div>
 
 </div>
+<templ:footer_body />
 
 <script>
 $(document).ready(function() {
@@ -120,4 +126,4 @@ $(document).ready(function() {
     }
 </script>
 
-<templ:footer />
+<templ:footer_html />

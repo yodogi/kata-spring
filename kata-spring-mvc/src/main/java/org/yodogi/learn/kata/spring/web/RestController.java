@@ -15,9 +15,9 @@ public class RestController {
 
 	protected final Log logger = LogFactory.getLog(getClass());
 
-	@RequestMapping(value = { "/pending-task.json" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/pendingTask.json" }, method = RequestMethod.GET)
 	public String getPendingTask() {
-		return loadJsonFile("/json/test.json");
+		return loadJsonFile("/json/task_pending_manager.json");
 	}
 
 	private String loadJsonFile(String resource_json) {

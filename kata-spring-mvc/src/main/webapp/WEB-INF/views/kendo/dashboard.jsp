@@ -3,8 +3,33 @@
 
 <%@taglib prefix="templ" tagdir="/WEB-INF/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+		<templ:top_head title_page="DashBoard" />
+	
+<style>
 
-<templ:header title_page="DashBoard" />
+#panels
+{
+    margin-left: 20px;
+    text-align: center;
+}
+
+#panels li
+{
+    margin-right: 10px;
+    margin-bottom: 10px;
+    width: 48%;
+    list-style: none;
+    float: left;
+}
+
+</style>
+
+    </head>
+    <body>
+    	<templ:top_body />
 <!-- 
 pending, in progress, queries, reports, statistics
  -->
@@ -56,28 +81,10 @@ pending, in progress, queries, reports, statistics
 		<div class="demo-section">
 		    <kendo:datePicker name="datepicker" value="${now}" format="dd MMMM yyyy" />
 		</div>
- -->		
+		
 	</div>
-</div>
-<!--
  -->
- 	
-<style scoped>
-
-#panels
-{
-    margin-left: 20px;
-    text-align: center;
-}
-
-#panels li
-{
-    margin-right: 10px;
-    margin-bottom: 10px;
-    width: 48%;
-    list-style: none;
-    float: left;
-}
-
-</style>
-<templ:footer />
+ </div>
+ 
+<templ:footer_body />
+<templ:footer_html />

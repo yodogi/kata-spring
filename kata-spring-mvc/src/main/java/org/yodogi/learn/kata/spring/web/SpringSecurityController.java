@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,16 +23,18 @@ public class SpringSecurityController {
 	protected MessageSource messageSource;
 
 	@RequestMapping(value = "/welcome.htm", method = RequestMethod.GET)
-	public String printWelcome(ModelMap model, Principal principal) {
+	public String printWelcome(ModelMap model) {
 
-		String name = principal.getName();
-		model.addAttribute("username", name);
+		Principal authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		String username = authentication.getName();
+		model.addAttribute("username", username);
 		model.addAttribute("message", "Spring Security Custom Form example");
 
 		Locale locale = LocaleContextHolder.getLocale();
-		logger.info("Message trace of [message.springmvc]: " + messageSource.getMessage("AuthByAdapterProvider.incorrectKey", null, locale)); //
+		logger.info("Message trace of [message.springmvc]: " + messageSource.getMessage("AuthByAdapterProvider.incorrectKey", null, locale));
 
-		logger.info("Wellcome controller login for " + name);
+		logger.info("Wellcome controller login for " + username);
 
 		return "ssecurity/hello";
 	}

@@ -8,4 +8,4 @@
  
 --%>
 
-<c:redirect url="/welcome.htm"/>
+<c:redirect url="/hello.htm"/>

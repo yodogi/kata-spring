@@ -39,4 +39,11 @@ public class AppConfig {
 		return messageSource;
 	}
 
+	public @Bean
+	AjaxTimeOutRediectFilter ajaxTimeOutRediectFilter() {
+		AjaxTimeOutRediectFilter filter = new AjaxTimeOutRediectFilter();
+		filter.setCustomSessionExpiredErrorCode(901);
+		return filter;
+	}
+
 }

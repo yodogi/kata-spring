@@ -3,8 +3,13 @@
 
 <%@taglib prefix="templ" tagdir="/WEB-INF/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<templ:header title_page="PanelBar" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+		<templ:top_head title_page="PanelBar" />
+    </head>
+    <body>
+    	<templ:top_body />
 
 <c:url value="/content/task/pending" var="pending_task_contentUrl" />
 
@@ -43,6 +48,10 @@
 		<kendo:panelBar-item  text="Error Item" contentUrl="error.html" />					
 	</kendo:panelBar-items>
 </kendo:panelBar>
+	
+<div class="console"></div>
+
+<templ:footer_body />
 
 <script>
     function select(e) {
@@ -70,7 +79,5 @@
         kendoConsole.error("Loading failed with " + e.xhr.statusText + " " + e.xhr.status);
     }
 </script>
-	
-<div class="console"></div>
 
-<templ:footer />
+<templ:footer_html />
